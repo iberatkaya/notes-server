@@ -3,12 +3,12 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
-import http from "http";
+import swaggerUi from "swagger-ui-express";
 
 import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
 import noteRouter from "./routes/note";
-import { connectionString } from "./constants/secret";
+import { connectionString } from "./constants/db";
 import passport from "passport";
 import { basicStrategy } from "./passport/passport";
 
@@ -24,31 +24,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  async (req: express.Request, res: express.Response) => {
+    return res.send(
+      swaggerUi.generateHTML(await import("./public/swagger.json"), {
+        customSiteTitle: "Note API",
+      })
+    );
+  }
+);
+
 app.use("/", indexRouter);
 app.use("/auth/", authRouter);
 app.use("/note/", noteRouter);
 
-mongoose.connect(connectionString, { useNewUrlParser: true }, (err) => {
-  console.log("err", err);
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-var server = http.createServer(app);
-
-function normalizePort(val: string) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    return val;
-  }
-
-  if (port >= 0) {
-    return port;
-  }
-
-  return false;
-}
-
-var port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
-
-server.listen(port);
+export default app;

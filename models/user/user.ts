@@ -7,12 +7,13 @@ export const UserScheme = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
+
     validate: {
       validator: validator.isEmail,
     },
   },
-  name: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true, minLength: 6 },
 });
 
 export const User = mongoose.model<IUser>("User", UserScheme);
