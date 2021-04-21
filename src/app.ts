@@ -10,7 +10,7 @@ import authRouter from "./routes/auth";
 import noteRouter from "./routes/note";
 import { connectionString } from "./constants/db";
 import passport from "passport";
-import { basicStrategy } from "./passport/passport";
+import { basicStrategy } from "./middlewares/passport";
 
 var app = express();
 
@@ -29,7 +29,7 @@ app.use(
   swaggerUi.serve,
   async (req: express.Request, res: express.Response) => {
     return res.send(
-      swaggerUi.generateHTML(await import("./public/swagger.json"), {
+      swaggerUi.generateHTML(await import("../public/swagger.json"), {
         customSiteTitle: "Note API",
       })
     );

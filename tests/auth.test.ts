@@ -1,8 +1,8 @@
-import app from "../app";
+import app from "../src/app";
 import request from "supertest";
 import { Server } from "http";
 import { signUp } from "./utils";
-import { User } from "../models/user/user";
+import { User } from "../src/models/user/user";
 
 describe("Auth Requests", () => {
   /**

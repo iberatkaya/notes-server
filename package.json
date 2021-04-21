@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon index.ts --files ./global.d.ts",
-    "dev": "concurrently \"nodemon index.ts --files ./global.d.ts\" \"nodemon -x tsoa spec\"",
+    "start": "nodemon src/index.ts --files ./global.d.ts",
+    "dev": "concurrently \"nodemon src/index.ts --files ./global.d.ts\" \"nodemon -x tsoa spec\"",
     "build-docs": "tsoa spec",
     "pretest": "mongo db --eval \"db.dropDatabase();\"",
     "test": "jest --testTimeout=10000 --detectOpenHandles",
@@ -48,6 +48,7 @@
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.5",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "utility-types": "^3.10.0"
   }
 }

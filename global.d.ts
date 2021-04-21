@@ -1,4 +1,4 @@
-import { IUser } from "./interfaces/user/user";
+import { IUser } from "./src/interfaces/user/user";
 
 export {};
 

@@ -1,6 +1,6 @@
 import request from "supertest";
-import { AddNoteReqBody } from "../interfaces/requests/add_note_request_body/add_note_request_body";
-import { SignUpReqBody } from "../interfaces/requests/signup_request_body/signup_request_body";
+import { AddNoteReqBody } from "../src/interfaces/requests/add_note_request_body/add_note_request_body";
+import { SignUpReqBody } from "../src/interfaces/requests/signup_request_body/signup_request_body";
 
 export const defaultEmail = "ibk@gmail.com";
 export const defaultName = "Berat";
