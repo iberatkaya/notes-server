@@ -41,7 +41,7 @@ describe("Auth Requests", () => {
     expect(firstRes.body.success).toEqual(true);
 
     const secondRes = await signUp(agent);
-    expect(secondRes.status).toEqual(200);
+    expect(secondRes.status).toEqual(500);
     expect(secondRes.body.success).toEqual(false);
   });
 
