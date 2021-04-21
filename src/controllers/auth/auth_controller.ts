@@ -1,18 +1,23 @@
-import express, { Request, Response, NextFunction } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
 import { Res } from "../../interfaces/responses/response";
 import { User } from "../../models/user/user";
 import { SignUpReqBody } from "../../interfaces/requests/signup_request_body/signup_request_body";
 import bcrypt from "bcrypt";
-import { validationResult } from "express-validator";
-import { Body, Controller, Post, Route } from "tsoa";
+import {
+  Body,
+  Controller,
+  Post,
+  Route,
+  SuccessResponse,
+  Response as TSOAResponse,
+} from "tsoa";
 
-@Route("auth/signup")
+@Route("auth")
 export class AuthController extends Controller {
   /**
    * Sign up a user.
    */
-  @Post()
+  @Post("signup")
+  @SuccessResponse("200", "Success")
   public async signUp(
     @Body()
     body: SignUpReqBody

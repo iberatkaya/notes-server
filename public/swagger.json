@@ -41,6 +41,21 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"EditNoteReqBody": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"body": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -56,8 +71,8 @@
 			"post": {
 				"operationId": "SignUp",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Success"
 					}
 				},
 				"description": "Sign up a user.",
@@ -75,12 +90,34 @@
 				}
 			}
 		},
+		"/note/getnotes": {
+			"get": {
+				"operationId": "GetNotes",
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				},
+				"description": "Add a note for the user.",
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/note/addnote": {
 			"post": {
 				"operationId": "AddNote",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Success"
 					}
 				},
 				"description": "Add a note for the user.",
@@ -92,6 +129,29 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/AddNoteReqBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/note/editnote": {
+			"post": {
+				"operationId": "EditNote",
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				},
+				"description": "Add a note for the user.",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EditNoteReqBody"
 							}
 						}
 					}

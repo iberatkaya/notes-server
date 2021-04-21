@@ -32,7 +32,7 @@ router.post(
       });
       res.send({ message: "Success", success: true });
     } catch (e) {
-      res.send({ success: false, message: JSON.stringify(e) });
+      res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
   }
 );

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon src/index.ts --files ./global.d.ts",
-    "dev": "concurrently \"nodemon src/index.ts --files ./global.d.ts\" \"nodemon -x tsoa spec\"",
+    "dev": "concurrently  \"nodemon -x tsoa spec\" \"nodemon src/index.ts --files ./global.d.ts\"",
     "build-docs": "tsoa spec",
     "pretest": "mongo db --eval \"db.dropDatabase();\"",
     "test": "jest --testTimeout=10000 --detectOpenHandles",
