@@ -12,7 +12,7 @@ import { connectionString } from "./constants/db";
 import passport from "passport";
 import { basicStrategy } from "./middlewares/passport";
 
-var app = express();
+const app = express();
 
 app.use(passport.initialize());
 

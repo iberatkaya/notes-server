@@ -87,7 +87,7 @@ export class NoteController extends Controller {
       throw "Neither title nor body were sent!";
     }
 
-    let updatedObj: Optional<INote> = {
+    const updatedObj: Optional<INote> = {
       title: title,
       body: noteBody,
     };

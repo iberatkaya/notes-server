@@ -1,0 +1,6 @@
+node_modules
+dist
+coverage
+*.config.js
+global.d.ts
+.eslintrc.js

@@ -1,8 +1,8 @@
 import express from "express";
 
-let router = express.Router();
+const router = express.Router();
 
-router.get("/", function (_req, res, _next) {
+router.get("/", function (_req, res) {
   res.send("Note API");
 });
 

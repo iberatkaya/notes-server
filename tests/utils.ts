@@ -56,7 +56,7 @@ export const addNote = async (
 
 export const getNotes = async (
   agent: request.SuperAgentTest,
-  page: string = "0",
+  page = "0",
   user: {
     email: string;
     password: string;

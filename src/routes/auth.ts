@@ -5,7 +5,7 @@ import { Res } from "../interfaces/responses/response";
 import { ParamsDictionary } from "express-serve-static-core";
 import { SignUpReqBody } from "../interfaces/requests/signup_request_body/signup_request_body";
 
-let router = express.Router();
+const router = express.Router();
 
 router.post(
   "/signup",
@@ -13,7 +13,7 @@ router.post(
   body("password").isLength({ min: 6 }),
   body("name").notEmpty(),
   async (
-    req: Request<ParamsDictionary, {}, SignUpReqBody>,
+    req: Request<ParamsDictionary, never, SignUpReqBody>,
     res: Response<Res>
   ) => {
     try {

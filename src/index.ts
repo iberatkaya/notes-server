@@ -1,10 +1,10 @@
 import http from "http";
 import app from "./app";
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 function normalizePort(val: string) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     return val;
@@ -17,7 +17,7 @@ function normalizePort(val: string) {
   return false;
 }
 
-var port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 server.listen(port);

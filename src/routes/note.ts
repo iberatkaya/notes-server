@@ -7,13 +7,13 @@ import { AddNoteReqBody } from "../interfaces/requests/add_note_request_body/add
 import { EditNoteReqBody } from "../interfaces/requests/edit_note_request_body/edit_note_request_body";
 import { Res } from "../interfaces/responses/response";
 
-let router = express.Router();
+const router = express.Router();
 
 router.get(
   "/getnotes",
   passport.authenticate("basic", { session: false }),
   async (
-    req: Request<ParamsDictionary, {}, EditNoteReqBody, { page: string }>,
+    req: Request<ParamsDictionary, never, EditNoteReqBody, { page: string }>,
     res: Response<Res>
   ) => {
     try {
@@ -36,7 +36,7 @@ router.post(
   body("title").notEmpty(),
   body("body").notEmpty(),
   async (
-    req: Request<ParamsDictionary, {}, AddNoteReqBody>,
+    req: Request<ParamsDictionary, never, AddNoteReqBody>,
     res: Response<Res>
   ) => {
     try {
@@ -60,7 +60,7 @@ router.post(
   "/editnote",
   passport.authenticate("basic", { session: false }),
   async (
-    req: Request<ParamsDictionary, {}, EditNoteReqBody>,
+    req: Request<ParamsDictionary, never, EditNoteReqBody>,
     res: Response<Res>
   ) => {
     try {
