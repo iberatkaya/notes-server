@@ -26,6 +26,35 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Pick_INote.title-or-body-or-date-or-ownerId-or-_id_": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"body": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"ownerId": {
+						"type": "string"
+					},
+					"_id": {}
+				},
+				"required": [
+					"title",
+					"body",
+					"date",
+					"ownerId"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"INoteData": {
+				"$ref": "#/components/schemas/Pick_INote.title-or-body-or-date-or-ownerId-or-_id_"
+			},
 			"AddNoteReqBody": {
 				"properties": {
 					"title": {
@@ -54,6 +83,9 @@
 						"type": "string"
 					}
 				},
+				"required": [
+					"id"
+				],
 				"type": "object",
 				"additionalProperties": false
 			}
@@ -95,7 +127,17 @@
 				"operationId": "GetNotes",
 				"responses": {
 					"200": {
-						"description": "Success"
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/INoteData"
+									},
+									"type": "array"
+								}
+							}
+						}
 					}
 				},
 				"description": "Add a note for the user.",
