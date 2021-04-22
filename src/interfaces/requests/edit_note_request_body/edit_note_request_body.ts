@@ -1,5 +1,5 @@
 export interface EditNoteReqBody {
-  id?: string;
+  id: string;
   title?: string;
   body?: string;
 }

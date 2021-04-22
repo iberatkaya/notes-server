@@ -6,3 +6,8 @@ export interface INote extends mongoose.Document {
   date: Date;
   ownerId: string;
 }
+
+export type INoteData = Pick<
+  INote,
+  "title" | "body" | "date" | "ownerId" | "_id"
+>;
