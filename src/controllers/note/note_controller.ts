@@ -3,7 +3,6 @@ import { Note } from "../../models/note/note";
 import {
   Body,
   Controller,
-  Response as TSOAResponse,
   Get,
   Post,
   Query,
@@ -11,9 +10,8 @@ import {
   SuccessResponse,
 } from "tsoa";
 import { EditNoteReqBody } from "../../interfaces/requests/edit_note_request_body/edit_note_request_body";
-import { INote } from "../../interfaces/note/note";
+import { INote, INoteData } from "../../interfaces/note/note";
 import { Optional } from "utility-types";
-import { Res } from "../../interfaces/responses/response";
 import { docLimit } from "../../constants/db";
 import { removeUndefinedFromObject } from "../../utils/utils";
 
@@ -34,7 +32,7 @@ export class NoteController extends Controller {
    */
   @Get("getnotes")
   @SuccessResponse("200", "Success")
-  public async getNotes(@Query() page: string): Promise<INote[]> {
+  public async getNotes(@Query() page: string): Promise<INoteData[]> {
     const pageNumber = parseInt(page) || 0;
     if (pageNumber < 0) {
       throw "Page number must be larger than 0!";
