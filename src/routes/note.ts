@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Params, ParamsDictionary } from "express-serve-static-core";
+import { ParamsDictionary } from "express-serve-static-core";
 import { body, validationResult } from "express-validator";
 import passport from "passport";
 import { NoteController } from "../controllers/note/note_controller";

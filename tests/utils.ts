@@ -1,5 +1,4 @@
 import request from "supertest";
-import { idText } from "typescript";
 import { AddNoteReqBody } from "../src/interfaces/requests/add_note_request_body/add_note_request_body";
 import { EditNoteReqBody } from "../src/interfaces/requests/edit_note_request_body/edit_note_request_body";
 import { SignUpReqBody } from "../src/interfaces/requests/signup_request_body/signup_request_body";

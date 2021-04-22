@@ -25,7 +25,7 @@ router.post(
       }
 
       const signupController = new AuthController();
-      const user = await signupController.signUp({
+      await signupController.signUp({
         email: req.body.email,
         name: req.body.name,
         password: req.body.password,

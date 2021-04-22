@@ -1,15 +1,7 @@
-import { Res } from "../../interfaces/responses/response";
 import { User } from "../../models/user/user";
 import { SignUpReqBody } from "../../interfaces/requests/signup_request_body/signup_request_body";
 import bcrypt from "bcrypt";
-import {
-  Body,
-  Controller,
-  Post,
-  Route,
-  SuccessResponse,
-  Response as TSOAResponse,
-} from "tsoa";
+import { Body, Controller, Post, Route, SuccessResponse } from "tsoa";
 
 @Route("auth")
 export class AuthController extends Controller {

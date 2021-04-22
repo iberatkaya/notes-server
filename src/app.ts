@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/docs",
   swaggerUi.serve,
-  async (req: express.Request, res: express.Response) => {
+  async (_req: express.Request, res: express.Response) => {
     return res.send(
       swaggerUi.generateHTML(await import("../public/swagger.json"), {
         customSiteTitle: "Note API",
