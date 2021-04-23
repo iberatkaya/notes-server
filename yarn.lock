@@ -1781,7 +1781,7 @@
   "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.21.1.tgz"
   "version" "2.21.1"
 
-"debug@^2.2.0", "debug@^2.3.3", "debug@~2.6.9", "debug@2.6.9", "debug@2.x.x":
+"debug@^2.2.0", "debug@^2.3.3", "debug@~2.6.9", "debug@2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
   "version" "2.6.9"
@@ -4245,15 +4245,6 @@
   "resolved" "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.9.0.tgz"
   "version" "0.9.0"
 
-"oauth2orize@^1.11.0":
-  "integrity" "sha1-eTzvJR1F696sMq5AqLaBT6qx1IM="
-  "resolved" "https://registry.npmjs.org/oauth2orize/-/oauth2orize-1.11.0.tgz"
-  "version" "1.11.0"
-  dependencies:
-    "debug" "2.x.x"
-    "uid2" "0.0.x"
-    "utils-merge" "1.x.x"
-
 "object-assign@^4.1.0":
   "integrity" "sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM="
   "resolved" "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
@@ -5728,11 +5719,6 @@
   "resolved" "https://registry.npmjs.org/uglify-js/-/uglify-js-3.13.4.tgz"
   "version" "3.13.4"
 
-"uid2@0.0.x":
-  "integrity" "sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I="
-  "resolved" "https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz"
-  "version" "0.0.3"
-
 "undefsafe@^2.0.3":
   "integrity" "sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A=="
   "resolved" "https://registry.npmjs.org/undefsafe/-/undefsafe-2.0.3.tgz"
@@ -5828,7 +5814,7 @@
   "resolved" "https://registry.npmjs.org/utility-types/-/utility-types-3.10.0.tgz"
   "version" "3.10.0"
 
-"utils-merge@1.0.1", "utils-merge@1.x.x":
+"utils-merge@1.0.1":
   "integrity" "sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM="
   "resolved" "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   "version" "1.0.1"

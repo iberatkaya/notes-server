@@ -25,7 +25,6 @@
     "express-validator": "^6.10.0",
     "mongoose": "^5.12.3",
     "morgan": "~1.9.1",
-    "oauth2orize": "^1.11.0",
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
     "swagger-ui-express": "^4.1.6",
