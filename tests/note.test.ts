@@ -13,6 +13,7 @@ import {
 } from "./utils";
 import { User } from "../src/models/user/user";
 import { INoteData } from "../src/interfaces/note/note";
+import mongoose from "mongoose";
 
 describe("Note Requests", () => {
   /**
@@ -37,6 +38,12 @@ describe("Note Requests", () => {
     await User.remove({}).exec();
 
     return server && server.close(done);
+  });
+
+  afterAll(async () => {
+    for (const connection of mongoose.connections) {
+      await connection.close();
+    }
   });
 
   it("should create a new note", async () => {
