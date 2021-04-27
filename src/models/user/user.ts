@@ -14,6 +14,7 @@ export const UserScheme = new mongoose.Schema({
   },
   name: { type: String, required: true },
   password: { type: String, required: true, minLength: 6 },
+  active: { type: Boolean, required: true },
 });
 
 export const User = mongoose.model<IUser>("User", UserScheme);

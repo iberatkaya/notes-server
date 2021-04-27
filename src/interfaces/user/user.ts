@@ -4,6 +4,7 @@ export interface IUser extends mongoose.Document {
   email: string;
   password: string;
   name: string;
+  active: boolean;
 }
 
 export interface IUserData {
@@ -11,4 +12,5 @@ export interface IUserData {
   password: string;
   name: string;
   _id: string;
+  active: boolean;
 }

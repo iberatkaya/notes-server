@@ -11,8 +11,12 @@ export const basicStrategy = new BasicStrategy(
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
-
     if (!validPassword) {
+      return done(null, false);
+    }
+
+    //Check if the user has verified their email.
+    if (!user.active) {
       return done(null, false);
     }
     return done(null, user);

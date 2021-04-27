@@ -37,4 +37,20 @@ router.post(
   }
 );
 
+router.get(
+  "/verifyemail",
+  async (
+    req: Request<ParamsDictionary, never, never, { token: string }>,
+    res: Response<Res>
+  ) => {
+    try {
+      const signupController = new AuthController();
+      const response = await signupController.verifyEmail(req.query.token);
+      res.send(response);
+    } catch (e) {
+      res.status(500).send({ success: false, message: JSON.stringify(e) });
+    }
+  }
+);
+
 export default router;
