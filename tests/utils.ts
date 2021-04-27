@@ -2,6 +2,7 @@ import request from "supertest";
 import { AddNoteReqBody } from "../src/interfaces/requests/add_note_request_body/add_note_request_body";
 import { EditNoteReqBody } from "../src/interfaces/requests/edit_note_request_body/edit_note_request_body";
 import { SignUpReqBody } from "../src/interfaces/requests/signup_request_body/signup_request_body";
+import { User } from "../src/models/user/user";
 import { removeUndefinedFromObject } from "../src/utils/utils";
 
 export const defaultEmail = "ibk@gmail.com";
@@ -25,6 +26,7 @@ export const signUp = async (
   };
 
   const res = await agent.post("/auth/signup").send(signupBody);
+  await verifyUser(signupBody.email);
   return res;
 };
 
@@ -52,6 +54,15 @@ export const addNote = async (
     .auth(user.email, user.password)
     .send(addNoteReqBody);
   return res;
+};
+
+const verifyUser = async (email: string) => {
+  const user = await User.findOne({ email: email }).exec();
+  if (user) {
+    user.active = true;
+    await user.save();
+    await User.findOne({ email: email }).exec();
+  }
 };
 
 export const getNotes = async (

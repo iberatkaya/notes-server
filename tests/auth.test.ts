@@ -4,6 +4,7 @@ import { Server } from "http";
 import { signUp } from "./utils";
 import { User } from "../src/models/user/user";
 import mongoose from "mongoose";
+import { UserEmailVerification } from "../src/models/user_email_verification/user_email_verification";
 
 describe("Auth Requests", () => {
   /**
@@ -26,6 +27,7 @@ describe("Auth Requests", () => {
 
   afterEach(async (done) => {
     await User.remove({}).exec();
+    await UserEmailVerification.remove({}).exec();
 
     return server && server.close(done);
   });
