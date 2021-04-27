@@ -31,6 +31,7 @@ npm run dev
 - [passport](https://github.com/jaredhanson/passport) - Used for user authentication.
 - [tsoa](https://github.com/lukeautry/tsoa) - Used for documentation generation.
 - [express-validator](https://github.com/express-validator/express-validator) - Used for verification.
+- [nodemailer](https://github.com/nodemailer/nodemailer) - Used for sending verification emails.
 - [ts-jest](https://github.com/kulshekhar/ts-jest) & [jest](https://github.com/facebook/jest) - Used for testing with TypeScript.
 - [supertest](https://github.com/visionmedia/supertest) - Used for API request testing.
 - [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) & [eslint](https://github.com/eslint/eslint) - Used for linting.
