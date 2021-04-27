@@ -6,6 +6,49 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"IUserData": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password",
+					"name",
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SignUpRes": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IUserData"
+					}
+				},
+				"required": [
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"SignUpReqBody": {
 				"properties": {
 					"email": {
@@ -54,6 +97,44 @@
 			},
 			"INoteData": {
 				"$ref": "#/components/schemas/Pick_INote.title-or-body-or-date-or-ownerId-or-_id_"
+			},
+			"GetNotesRes": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/INoteData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Res": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"AddNoteReqBody": {
 				"properties": {
@@ -104,7 +185,14 @@
 				"operationId": "SignUp",
 				"responses": {
 					"200": {
-						"description": "Success"
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SignUpRes"
+								}
+							}
+						}
 					}
 				},
 				"description": "Sign up a user.",
@@ -131,10 +219,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/INoteData"
-									},
-									"type": "array"
+									"$ref": "#/components/schemas/GetNotesRes"
 								}
 							}
 						}
@@ -159,7 +244,14 @@
 				"operationId": "AddNote",
 				"responses": {
 					"200": {
-						"description": "Success"
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Res"
+								}
+							}
+						}
 					}
 				},
 				"description": "Add a note for the user.",
@@ -182,7 +274,14 @@
 				"operationId": "EditNote",
 				"responses": {
 					"200": {
-						"description": "Success"
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Res"
+								}
+							}
+						}
 					}
 				},
 				"description": "Add a note for the user.",

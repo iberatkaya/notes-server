@@ -10,10 +10,12 @@ import {
   SuccessResponse,
 } from "tsoa";
 import { EditNoteReqBody } from "../../interfaces/requests/edit_note_request_body/edit_note_request_body";
-import { INote, INoteData } from "../../interfaces/note/note";
+import { INote } from "../../interfaces/note/note";
 import { Optional } from "utility-types";
 import { docLimit } from "../../constants/db";
 import { removeUndefinedFromObject } from "../../utils/utils";
+import { GetNotesRes } from "../../interfaces/responses/get_notes_response/get_notes_response";
+import { Res } from "../../interfaces/responses/response";
 
 @Route("note")
 export class NoteController extends Controller {
@@ -32,7 +34,7 @@ export class NoteController extends Controller {
    */
   @Get("getnotes")
   @SuccessResponse("200", "Success")
-  public async getNotes(@Query() page: string): Promise<INoteData[]> {
+  public async getNotes(@Query() page: string): Promise<GetNotesRes> {
     const pageNumber = parseInt(page) || 0;
     if (pageNumber < 0) {
       throw "Page number must be larger than 0!";
@@ -48,7 +50,11 @@ export class NoteController extends Controller {
       })
       .exec();
 
-    return notes;
+    return {
+      data: notes,
+      message: "Success",
+      success: true,
+    };
   }
 
   /**
@@ -59,13 +65,15 @@ export class NoteController extends Controller {
   public async addNote(
     @Body()
     body: AddNoteReqBody
-  ): Promise<void> {
+  ): Promise<Res> {
     const note = new Note();
     note.body = body.body;
     note.title = body.title;
     note.date = new Date();
     note.ownerId = this.userId;
     await note.save();
+
+    return { message: "Success", success: true };
   }
 
   /**
@@ -76,7 +84,7 @@ export class NoteController extends Controller {
   public async editNote(
     @Body()
     body: EditNoteReqBody
-  ): Promise<void> {
+  ): Promise<Res> {
     const id = body.id;
     const title = body.title;
     const noteBody = body.body;
@@ -95,5 +103,7 @@ export class NoteController extends Controller {
     removeUndefinedFromObject(updatedObj);
 
     await Note.findByIdAndUpdate(id, updatedObj).exec();
+
+    return { message: "Success", success: true };
   }
 }

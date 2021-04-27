@@ -25,12 +25,12 @@ router.post(
       }
 
       const signupController = new AuthController();
-      await signupController.signUp({
+      const response = await signupController.signUp({
         email: req.body.email,
         name: req.body.name,
         password: req.body.password,
       });
-      res.send({ message: "Success", success: true });
+      res.send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }

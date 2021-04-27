@@ -5,6 +5,7 @@ import passport from "passport";
 import { NoteController } from "../controllers/note/note_controller";
 import { AddNoteReqBody } from "../interfaces/requests/add_note_request_body/add_note_request_body";
 import { EditNoteReqBody } from "../interfaces/requests/edit_note_request_body/edit_note_request_body";
+import { GetNotesRes } from "../interfaces/responses/get_notes_response/get_notes_response";
 import { Res } from "../interfaces/responses/response";
 
 const router = express.Router();
@@ -14,16 +15,12 @@ router.get(
   passport.authenticate("basic", { session: false }),
   async (
     req: Request<ParamsDictionary, never, EditNoteReqBody, { page: string }>,
-    res: Response<Res>
+    res: Response<GetNotesRes>
   ) => {
     try {
       const noteController = new NoteController(req.user?._id);
-      const notes = await noteController.getNotes(req.query.page);
-      res.send({
-        message: "Success",
-        success: true,
-        data: JSON.stringify(notes),
-      });
+      const response = await noteController.getNotes(req.query.page);
+      res.status(200).send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
@@ -48,8 +45,8 @@ router.post(
       }
 
       const noteController = new NoteController(req.user?._id);
-      await noteController.addNote(req.body);
-      res.send({ message: "Success", success: true });
+      const response = await noteController.addNote(req.body);
+      res.send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
@@ -65,8 +62,8 @@ router.post(
   ) => {
     try {
       const noteController = new NoteController(req.user?._id);
-      await noteController.editNote(req.body);
-      res.send({ message: "Success", success: true });
+      const response = await noteController.editNote(req.body);
+      res.send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
