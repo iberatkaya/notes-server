@@ -4,6 +4,7 @@ import { body, validationResult } from "express-validator";
 import passport from "passport";
 import { NoteController } from "../controllers/note/note_controller";
 import { AddNoteReqBody } from "../interfaces/requests/add_note_request_body/add_note_request_body";
+import { DeleteNoteReqBody } from "../interfaces/requests/delete_note_request_body/delete_note_request_body";
 import { EditNoteReqBody } from "../interfaces/requests/edit_note_request_body/edit_note_request_body";
 import { GetNotesRes } from "../interfaces/responses/get_notes_response/get_notes_response";
 import { Res } from "../interfaces/responses/response";
@@ -46,7 +47,7 @@ router.post(
 
       const noteController = new NoteController(req.user?._id);
       const response = await noteController.addNote(req.body);
-      res.send(response);
+      res.status(200).send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
@@ -63,7 +64,24 @@ router.post(
     try {
       const noteController = new NoteController(req.user?._id);
       const response = await noteController.editNote(req.body);
-      res.send(response);
+      res.status(200).send(response);
+    } catch (e) {
+      res.status(500).send({ success: false, message: JSON.stringify(e) });
+    }
+  }
+);
+
+router.post(
+  "/deletenote",
+  passport.authenticate("basic", { session: false }),
+  async (
+    req: Request<ParamsDictionary, never, DeleteNoteReqBody>,
+    res: Response<Res>
+  ) => {
+    try {
+      const noteController = new NoteController(req.user?._id);
+      const response = await noteController.deleteNote(req.body);
+      res.status(200).send(response);
     } catch (e) {
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }

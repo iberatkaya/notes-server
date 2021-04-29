@@ -16,6 +16,8 @@ import { docLimit } from "../../constants/db";
 import { removeUndefinedFromObject } from "../../utils/utils";
 import { GetNotesRes } from "../../interfaces/responses/get_notes_response/get_notes_response";
 import { Res } from "../../interfaces/responses/response";
+import { DeleteNoteReqBody } from "../../interfaces/requests/delete_note_request_body/delete_note_request_body";
+import { AddNotesRes } from "../../interfaces/responses/add_notes_response/add_notes_response";
 
 @Route("note")
 export class NoteController extends Controller {
@@ -65,7 +67,7 @@ export class NoteController extends Controller {
   public async addNote(
     @Body()
     body: AddNoteReqBody
-  ): Promise<Res> {
+  ): Promise<AddNotesRes> {
     const note = new Note();
     note.body = body.body;
     note.title = body.title;
@@ -73,7 +75,17 @@ export class NoteController extends Controller {
     note.ownerId = this.userId;
     await note.save();
 
-    return { message: "Success", success: true };
+    return {
+      message: "Success",
+      success: true,
+      data: {
+        body: note.body,
+        date: note.date,
+        ownerId: note.ownerId,
+        title: note.title,
+        _id: note.id,
+      },
+    };
   }
 
   /**
@@ -103,6 +115,31 @@ export class NoteController extends Controller {
     removeUndefinedFromObject(updatedObj);
 
     await Note.findByIdAndUpdate(id, updatedObj).exec();
+
+    return { message: "Success", success: true };
+  }
+
+  /**
+   * Delete a note for the user.
+   */
+  @Post("deletenote")
+  @SuccessResponse("200", "Success")
+  public async deleteNote(
+    @Body()
+    body: DeleteNoteReqBody
+  ): Promise<Res> {
+    const id = body.noteId;
+    if (!id) {
+      throw "ID must be given!";
+    }
+
+    const note = await Note.findById(id).exec();
+
+    if (!note) {
+      throw "Could not find the note!";
+    }
+
+    await note.delete();
 
     return { message: "Success", success: true };
   }

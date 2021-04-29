@@ -6,29 +6,29 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"IUserData": {
+			"Pick_IUserData._id-or-active-or-email-or-name_": {
 				"properties": {
-					"email": {
+					"_id": {
 						"type": "string"
 					},
-					"password": {
+					"active": {
+						"type": "boolean"
+					},
+					"email": {
 						"type": "string"
 					},
 					"name": {
 						"type": "string"
-					},
-					"_id": {
-						"type": "string"
 					}
 				},
 				"required": [
+					"_id",
+					"active",
 					"email",
-					"password",
-					"name",
-					"_id"
+					"name"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"SignUpRes": {
 				"properties": {
@@ -39,7 +39,7 @@
 						"type": "string"
 					},
 					"data": {
-						"$ref": "#/components/schemas/IUserData"
+						"$ref": "#/components/schemas/Pick_IUserData._id-or-active-or-email-or-name_"
 					}
 				},
 				"required": [
@@ -69,8 +69,25 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Res": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Pick_INote.title-or-body-or-date-or-ownerId-or-_id_": {
 				"properties": {
+					"_id": {},
 					"title": {
 						"type": "string"
 					},
@@ -83,8 +100,7 @@
 					},
 					"ownerId": {
 						"type": "string"
-					},
-					"_id": {}
+					}
 				},
 				"required": [
 					"title",
@@ -120,13 +136,16 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Res": {
+			"AddNotesRes": {
 				"properties": {
 					"success": {
 						"type": "boolean"
 					},
 					"message": {
 						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/INoteData"
 					}
 				},
 				"required": [
@@ -166,6 +185,18 @@
 				},
 				"required": [
 					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteNoteReqBody": {
+				"properties": {
+					"noteId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"noteId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -210,6 +241,34 @@
 				}
 			}
 		},
+		"/auth/verifyemail": {
+			"get": {
+				"operationId": "VerifyEmail",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Res"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/note/getnotes": {
 			"get": {
 				"operationId": "GetNotes",
@@ -248,7 +307,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Res"
+									"$ref": "#/components/schemas/AddNotesRes"
 								}
 							}
 						}
@@ -293,6 +352,36 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/EditNoteReqBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/note/deletenote": {
+			"post": {
+				"operationId": "DeleteNote",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Res"
+								}
+							}
+						}
+					}
+				},
+				"description": "Delete a note for the user.",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteNoteReqBody"
 							}
 						}
 					}
