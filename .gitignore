@@ -9,6 +9,8 @@ src/constants/secret.ts
 dist/
 build/
 
+.DS_Store
+
 # Runtime data
 pids
 *.pid
