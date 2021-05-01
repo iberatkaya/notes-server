@@ -7,6 +7,7 @@ Notes Server is a REST API built with Express.js and MongoDB using TypeScript.
 - [Installation](#installation)
 - [Features](#features)
 - [Dependencies](#dependencies)
+- [Documentation](#documentation)
 - [Running Tests](#running-tests)
 - [Contributing](#contributing)
 
@@ -35,6 +36,10 @@ npm run dev
 - [ts-jest](https://github.com/kulshekhar/ts-jest) & [jest](https://github.com/facebook/jest) - Used for testing with TypeScript.
 - [supertest](https://github.com/visionmedia/supertest) - Used for API request testing.
 - [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) & [eslint](https://github.com/eslint/eslint) - Used for linting.
+
+## Documentation
+
+You can view the API documentation [here](http://notes-app.us-west-2.elasticbeanstalk.com/docs/).
 
 ## Running Tests
 
