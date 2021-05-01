@@ -10,12 +10,14 @@ import {
   Get,
   Query,
 } from "tsoa";
-import { SignUpRes } from "../../interfaces/responses/sign_up_response/sign_up_response";
+import { SignUpRes } from "../../interfaces/responses/signup_response/signup_response";
 import nodemailer from "nodemailer";
 import { nanoid } from "nanoid";
 import { UserEmailVerification } from "../../models/user_email_verification/user_email_verification";
 import { baseUrlString, emailPasswordString } from "../../constants/db";
 import { Res } from "../../interfaces/responses/response";
+import { LoginReqBody } from "../../interfaces/requests/login_request_body/login_request_body";
+import { LoginRes } from "../../interfaces/responses/login_response/login_response";
 
 @Route("auth")
 export class AuthController extends Controller {
@@ -56,19 +58,59 @@ export class AuthController extends Controller {
 
     const verifyUrl = baseUrlString + "/auth/verifyemail?token=" + token;
 
-    // send mail with defined transport object
-    await transporter.sendMail({
-      from: "Notes App", // sender address
-      to: body.email, // list of receivers
-      subject: "Verify your email", // Subject line
-      text: "Verify your email: " + verifyUrl, // plain text body
-    });
+    try {
+      await transporter.sendMail({
+        from: "Notes App",
+        to: body.email,
+        subject: "Verify your email",
+        text: "Verify your email by clicking this link: " + verifyUrl,
+      });
+    } catch (e) {
+      console.log(e);
+    }
 
     await user.save();
     await userEmailVerification.save();
 
     return {
       message: "Success",
+      success: true,
+      data: {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        active: user.active,
+      },
+    };
+  }
+
+  /**
+   * Check if a user exists.
+   */
+  @Post("login")
+  @SuccessResponse("200", "Success")
+  public async login(
+    @Body()
+    body: LoginReqBody
+  ): Promise<LoginRes> {
+    const user = await User.findOne({ email: body.email }).exec();
+
+    if (!user) {
+      return {
+        message: "User not found!",
+        success: false,
+      };
+    }
+
+    const validPassword = await bcrypt.compare(body.password, user.password);
+    if (!validPassword) {
+      return {
+        message: "Incorrect email or password!",
+        success: false,
+      };
+    }
+    return {
+      message: "User found!",
       success: true,
       data: {
         _id: user._id,
@@ -90,8 +132,12 @@ export class AuthController extends Controller {
         email: userEmailVerification.email,
       }).exec();
       if (user) {
+        //Set the user to active and save the document.
         user.active = true;
         await user.save();
+
+        //Delete the document.
+        await userEmailVerification.delete();
 
         return {
           message: "Verified email!",

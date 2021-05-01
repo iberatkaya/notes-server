@@ -69,6 +69,45 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"LoginRes": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/Pick_IUserData._id-or-active-or-email-or-name_"
+					}
+				},
+				"required": [
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginReqBody": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"name",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Res": {
 				"properties": {
 					"success": {
@@ -235,6 +274,36 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/SignUpReqBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Check if a user exists.",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginReqBody"
 							}
 						}
 					}

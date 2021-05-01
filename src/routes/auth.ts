@@ -4,6 +4,8 @@ import express, { Request, Response } from "express";
 import { Res } from "../interfaces/responses/response";
 import { ParamsDictionary } from "express-serve-static-core";
 import { SignUpReqBody } from "../interfaces/requests/signup_request_body/signup_request_body";
+import { LoginRes } from "../interfaces/responses/login_response/login_response";
+import { LoginReqBody } from "../interfaces/requests/login_request_body/login_request_body";
 
 const router = express.Router();
 
@@ -26,6 +28,27 @@ router.post(
 
       const signupController = new AuthController();
       const response = await signupController.signUp({
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password,
+      });
+      res.send(response);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send({ success: false, message: JSON.stringify(e) });
+    }
+  }
+);
+
+router.post(
+  "/login",
+  async (
+    req: Request<ParamsDictionary, never, LoginReqBody>,
+    res: Response<LoginRes>
+  ) => {
+    try {
+      const authController = new AuthController();
+      const response = await authController.login({
         email: req.body.email,
         name: req.body.name,
         password: req.body.password,
