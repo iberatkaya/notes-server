@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 
 src/constants/secret.ts
+dist/
+build/
 
 # Runtime data
 pids
@@ -61,3 +63,8 @@ typings/
 
 # next.js build output
 .next
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

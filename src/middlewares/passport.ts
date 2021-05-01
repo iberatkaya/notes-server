@@ -1,6 +1,6 @@
 import { BasicStrategy } from "passport-http";
 import { User } from "../models/user/user";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const basicStrategy = new BasicStrategy(
   async (username, password, done) => {

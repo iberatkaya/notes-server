@@ -1,6 +1,6 @@
 import { User } from "../../models/user/user";
 import { SignUpReqBody } from "../../interfaces/requests/signup_request_body/signup_request_body";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import {
   Body,
   Controller,
