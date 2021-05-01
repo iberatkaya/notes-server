@@ -23,7 +23,6 @@ npm run dev
 
 - Create an account.
 - Create, edit, and fetch notes.
-- Checkout API documentation at `localhost:3000/docs`.
 
 ## Dependencies
 
