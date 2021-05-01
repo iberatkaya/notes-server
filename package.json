@@ -4,15 +4,13 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "start": "node build/src/index.js",
+    "start": "nodemon src/index.ts --files ./global.d.ts",
     "dev": "concurrently  \"nodemon -x tsoa spec\" \"nodemon src/index.ts --files ./global.d.ts\"",
     "build-docs": "tsoa spec",
     "pretest": "mongo db --eval \"db.dropDatabase();\"",
     "test": "jest --testTimeout=10000 --detectOpenHandles",
     "coverage": "jest --coverage",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
-    "dist": "sh ./scripts/dist.sh",
-    "deploy": "npm run dist && eb deploy --staged"
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "nodemonConfig": {
     "ignore": [
