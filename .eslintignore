@@ -4,3 +4,5 @@ coverage
 *.config.js
 global.d.ts
 .eslintrc.js
+build
+secret.ts
