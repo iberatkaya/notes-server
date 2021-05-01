@@ -65,9 +65,7 @@ export class AuthController extends Controller {
         subject: "Verify your email",
         text: "Verify your email by clicking this link: " + verifyUrl,
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
 
     await user.save();
     await userEmailVerification.save();

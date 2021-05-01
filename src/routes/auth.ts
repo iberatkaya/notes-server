@@ -34,7 +34,6 @@ router.post(
       });
       res.send(response);
     } catch (e) {
-      console.log(e);
       res.status(500).send({ success: false, message: JSON.stringify(e) });
     }
   }
