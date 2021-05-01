@@ -11,6 +11,7 @@ import noteRouter from "./routes/note";
 import { connectionString } from "./constants/db";
 import passport from "passport";
 import { basicStrategy } from "./middlewares/passport";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -23,6 +24,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
 
 app.use(
   "/docs",
