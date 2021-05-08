@@ -1,6 +1,6 @@
 # Notes Server
 
-Notes Server is a REST API built with Express.js and MongoDB using TypeScript. Checkout the [client](https://github.com/iberatkaya/note-app).
+Notes Server is a REST API built with Express.js and MongoDB using TypeScript. Checkout the [client](https://github.com/iberatkaya/notes-app).
 
 ## Table of contents
 
