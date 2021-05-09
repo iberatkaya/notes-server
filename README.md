@@ -38,7 +38,7 @@ npm run dev
 
 ## Documentation
 
-You can view the API documentation `localhost:3000/docs`.
+You can view the API documentation [here](https://ibk-note-app.herokuapp.com/docs/).
 
 ## Running Tests
 
